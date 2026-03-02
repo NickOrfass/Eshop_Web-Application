@@ -19,6 +19,8 @@ class User(AbstractBaseUser):
     is_manager = models.BooleanField(default=False)
     # Boolean field to indicate if the user is staff
     is_staff = models.BooleanField(default=False)
+    # Boolean field to indicate if the user is a superuser
+    is_superuser = models.BooleanField(default=False)
 
     # Assign the custom user manager to the User model
     objects = UserManager()
@@ -39,11 +41,6 @@ class User(AbstractBaseUser):
     # Method to check if the user has permissions for a specific app
     def has_module_perms(self, app_label):
         return True
-
-    # Property to determine if the user is staff; uses is_admin field
-    @property
-    def is_staff(self):
-        return self.is_admin
 
     # Method to get the count of likes the user has
     def get_likes_count(self):
